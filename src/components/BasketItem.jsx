@@ -1,3 +1,7 @@
+import { useContext } from 'react';
+// сам контекст
+import { ShopContext } from '../context/context';
+
 function BasketItem({
   id,
   displayName: name,
@@ -7,6 +11,8 @@ function BasketItem({
   decQuantity = Function.prototype,
   incQuantity = Function.prototype,
 }) {
+  const { example } = useContext(ShopContext); // задействуем контект ShopContext, вытаскиевам ключ example
+  console.log(example);
   return (
     <li className="collection-item">
       <span className="collection-item__span">{name}</span>

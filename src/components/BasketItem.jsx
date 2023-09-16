@@ -1,18 +1,10 @@
 import { useContext } from 'react';
-// сам контекст
 import { ShopContext } from '../context/context';
 
-function BasketItem({
-  id,
-  displayName: name,
-  priceProduct: price,
-  quantity,
-  removeItemFromBasket = Function.prototype,
-  decQuantity = Function.prototype,
-  incQuantity = Function.prototype,
-}) {
-  const { example } = useContext(ShopContext); // задействуем контект ShopContext, вытаскиевам ключ example
-  console.log(example);
+function BasketItem({ id, displayName: name, priceProduct: price, quantity }) {
+  const { removeItemFromBasket, decQuantity, incQuantity } =
+    useContext(ShopContext);
+
   return (
     <li className="collection-item">
       <span className="collection-item__span">{name}</span>

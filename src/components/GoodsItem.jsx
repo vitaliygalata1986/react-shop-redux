@@ -1,14 +1,18 @@
+import { useContext } from 'react';
+import { ShopContext } from '../context/context';
+
 function GoodsItem({
   mainId,
   displayName,
   displayDescription,
   price,
   displayAssets,
-  addToCard = Function.prototype,
 }) {
   const priceProduct = price.regularPrice;
   let imageGoods = '';
   displayAssets.forEach((el) => (imageGoods = el.full_background));
+
+  const { addToCard } = useContext(ShopContext);
 
   return (
     <div className="card">

@@ -3,9 +3,8 @@ import { ShopContext } from '../context/context';
 import { BasketItem } from './BasketItem';
 
 function BasketList() {
-  const { order = [], handleBasketShow = Function.prototype } =
+  const { order, handleBasketShow = Function.prototype } =
     useContext(ShopContext);
-
   const totalPrice = order.reduce((sum, item) => {
     return (sum += item.priceProduct * item.quantity);
   }, 0);

@@ -2,7 +2,7 @@ import { useEffect, useContext } from 'react';
 import { ShopContext } from '../context/context';
 
 function Alert() {
-  const { displayName = '', closeAlert = Function.prototype } =
+  const { displayName, closeAlert = Function.prototype } =
     useContext(ShopContext);
 
   // по таймеру будем его скрывать

@@ -26,9 +26,6 @@ export function reducer(state, { type, payload }) {
       const itemIndex = state.order.findIndex(
         (orderItem) => orderItem.id === payload.id
       );
-
-      console.log(itemIndex);
-
       let newOrder = null;
       if (itemIndex < 0) {
         const newItem = {

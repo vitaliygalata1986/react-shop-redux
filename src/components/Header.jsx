@@ -12,7 +12,7 @@ function Header() {
               target="_blank"
               rel="noreferrer"
             >
-              Repo
+              GitHub repository
             </a>
           </li>
         </ul>

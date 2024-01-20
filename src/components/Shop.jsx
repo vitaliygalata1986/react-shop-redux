@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { API_KEY, API_URL } from '../config';
+import { getProducts } from '../api';
 import { ShopContext } from '../context/context';
 import { Preloader } from './Preloader';
 import { GoodList } from './GoodList';
@@ -12,19 +12,18 @@ function Shop() {
     useContext(ShopContext);
 
   useEffect(() => {
-    // после монтирования будем вызывать fetch
-    fetch(API_URL, {
-      headers: {
-        Authorization: API_KEY,
-      },
-    })
-      .then((responce) => responce.json())
-      .then((data) => {
-        data.shop && setGoods(data.shop);
-      });
+    async function getAllProducts() {
+      try {
+        const data = await getProducts();
+        setGoods(data?.shop ?? []);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    // после монтирования будем вызывать getAllProducts
+    getAllProducts();
     // eslint-disable-next-line
   }, []); // операцию выполняем один раз, массив зависимостей будет пустым
-
   return (
     <main className="container content">
       <Cart />

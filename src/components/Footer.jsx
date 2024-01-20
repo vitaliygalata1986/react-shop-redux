@@ -10,7 +10,7 @@ function Footer() {
             rel="noreferrer"
             target="_blank"
           >
-            Repo
+            GitHub repository
           </a>
         </div>
       </div>

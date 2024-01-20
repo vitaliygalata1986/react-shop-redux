@@ -4,7 +4,7 @@ export function reducer(state, { type, payload }) {
     case 'SET_GOODS':
       return {
         ...state,
-        goods: payload || [], // если в payload нет ничего, то будет пустой массив
+        goods: payload,
         loading: false,
       };
     case 'REMOVE_FROM_BASKET':

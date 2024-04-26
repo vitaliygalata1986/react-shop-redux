@@ -1,12 +1,11 @@
 import { GoodsItem } from './GoodsItem';
-import { useContext } from 'react';
-import { ShopContext } from '../context/context';
+import { useSelector } from 'react-redux';
+import { selectAllGoods } from '../../src/redux/slices/productsSlice';
 
 function GoodList() {
-  const { goods = [] } = useContext(ShopContext);
+  const goods = useSelector(selectAllGoods);
 
   if (!goods.length) {
-    // если мы не сможем сделать setGoods(data.shop) в Shop.jsx, то вернем ниже надпись
     return <h3>Nothing here</h3>;
   }
 

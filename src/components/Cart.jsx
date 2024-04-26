@@ -1,14 +1,15 @@
-import { useContext } from 'react';
-import { ShopContext } from '../context/context';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleBasketShow, selectOrder } from '../redux/slices/cartSlice';
 
 function Cart() {
-  const { order, handleBasketShow = Function.prototype } =
-    useContext(ShopContext);
+  const dispatch = useDispatch();
+  const order = useSelector(selectOrder);
   const quantity = order.length;
+
   return (
     <div
       className="cart blue darken-4 white-text"
-      onClick={() => handleBasketShow()}
+      onClick={() => dispatch(handleBasketShow())}
     >
       <i className="material-icons">shopping_cart</i>
       {quantity ? <span className="cart-quantity">{quantity}</span> : null}

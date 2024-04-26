@@ -1,17 +1,15 @@
-import { useEffect, useContext } from 'react';
-import { ShopContext } from '../context/context';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectDisplayName, handleCloseAlert } from '../redux/slices/cartSlice';
 
 function Alert() {
-  const { displayName, closeAlert = Function.prototype } =
-    useContext(ShopContext);
+  const dispatch = useDispatch();
+  const displayName = useSelector(selectDisplayName);
 
-  // по таймеру будем его скрывать
   useEffect(() => {
-    const timerId = setTimeout(closeAlert, 3000);
-
-    // функция очистки
+    const timerId = setTimeout(() => dispatch(handleCloseAlert()), 3000);
     return () => {
-      clearTimeout(timerId); // когда придет новый товар, то нам нужно снять таймер и установить новый
+      clearTimeout(timerId);
     };
     // eslint-disable-next-line
   }, [displayName]);

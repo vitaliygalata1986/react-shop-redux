@@ -8,7 +8,7 @@ function Header() {
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
             <a
-              href="https://github.com/vitaliygalata1986/react-shop"
+              href="https://github.com/vitaliygalata1986/react-shop-redux"
               target="_blank"
               rel="noreferrer"
             >

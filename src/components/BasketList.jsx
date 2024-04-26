@@ -1,21 +1,14 @@
-import { useContext } from 'react';
-import { ShopContext } from '../context/context';
 import { BasketItem } from './BasketItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleBasketShow, selectOrder } from '../redux/slices/cartSlice';
 
 function BasketList() {
-  const { order, handleBasketShow = Function.prototype } =
-    useContext(ShopContext);
+  const dispatch = useDispatch();
+  const order = useSelector(selectOrder);
+
   const totalPrice = order.reduce((sum, item) => {
     return (sum += item.priceProduct * item.quantity);
   }, 0);
-
-  // reduce принимает функцию, которой будет проходить по очередно, и изначальное значение - 0
-  // в sum изначально попадет 0, и sum будем каждый раз нарасчивать, обходя каждый элемент корзины
-
-  /*
-  let totalPrice = 0;
-  order.forEach((item) => (totalPrice += item.priceProduct * item.quantity));
-  */
 
   return (
     <ul className="collection basket-list">
@@ -32,7 +25,10 @@ function BasketList() {
       <li className="collection-item">
         <button className="btn btn-small">Оформить</button>
       </li>
-      <i className="material-icons basket-close" onClick={handleBasketShow}>
+      <i
+        className="material-icons basket-close"
+        onClick={() => dispatch(handleBasketShow())}
+      >
         close
       </i>
     </ul>

@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { ShopContext } from '../context/context';
+import { handleAddToCart } from '../redux/slices/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function GoodsItem({
   mainId,
@@ -12,7 +12,7 @@ function GoodsItem({
   let imageGoods = '';
   displayAssets.forEach((el) => (imageGoods = el.full_background));
 
-  const { addToCard } = useContext(ShopContext);
+  const dispatch = useDispatch();
 
   return (
     <div className="card">
@@ -26,11 +26,13 @@ function GoodsItem({
       <div className="card-action">
         <button
           onClick={() =>
-            addToCard({
-              id: mainId,
-              displayName,
-              priceProduct,
-            })
+            dispatch(
+              handleAddToCart({
+                id: mainId,
+                displayName,
+                priceProduct,
+              })
+            )
           }
           className="btn"
         >

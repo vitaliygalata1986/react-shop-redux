@@ -1,29 +1,31 @@
-import { useEffect, useContext } from 'react';
-import { getProducts } from '../api';
-import { ShopContext } from '../context/context';
+import { API_URL, API_KEY } from '../config';
+import { useEffect } from 'react';
 import { Preloader } from './Preloader';
 import { GoodList } from './GoodList';
 import { Cart } from './Cart';
 import { BasketList } from './BasketList';
 import Alert from './Alert';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchGoods,
+  selectLoading,
+} from '../../src/redux/slices/productsSlice';
+import {
+  selectIsBasketShow,
+  selectDisplayName,
+} from '../../src/redux/slices/cartSlice';
 
 function Shop() {
-  const { loading, setGoods, isBasketShow, displayName } =
-    useContext(ShopContext);
+  const loading = useSelector(selectLoading);
+  const isBasketShow = useSelector(selectIsBasketShow);
+  const displayName = useSelector(selectDisplayName);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getAllProducts() {
-      try {
-        const data = await getProducts();
-        setGoods(data?.shop ?? []);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    // после монтирования будем вызывать getAllProducts
-    getAllProducts();
+    dispatch(fetchGoods({ API_URL, API_KEY }));
     // eslint-disable-next-line
-  }, []); // операцию выполняем один раз, массив зависимостей будет пустым
+  }, []);
   return (
     <main className="container content">
       <Cart />

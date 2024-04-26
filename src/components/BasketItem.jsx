@@ -1,23 +1,26 @@
-import { useContext } from 'react';
-import { ShopContext } from '../context/context';
+import { useDispatch } from 'react-redux';
+import {
+  handleDeleteItemFromCart,
+  handleDecQuantity,
+  handelIncQuantitey,
+} from '../redux/slices/cartSlice';
 
 function BasketItem({ id, displayName: name, priceProduct: price, quantity }) {
-  const { removeItemFromBasket, decQuantity, incQuantity } =
-    useContext(ShopContext);
+  const dispatch = useDispatch();
 
   return (
     <li className="collection-item">
       <span className="collection-item__span">{name}</span>
       <i
         className="material-icons basket-quantity"
-        onClick={() => decQuantity(id)}
+        onClick={() => dispatch(handleDecQuantity(id))}
       >
         remove_circle
       </i>{' '}
       x{quantity}
       <i
         className="material-icons basket-quantity"
-        onClick={() => incQuantity(id)}
+        onClick={() => dispatch(handelIncQuantitey(id))}
       >
         add_box
       </i>
@@ -26,7 +29,7 @@ function BasketItem({ id, displayName: name, priceProduct: price, quantity }) {
       <span className="secondary-content">
         <i
           className="material-icons basket-delete"
-          onClick={() => removeItemFromBasket(id)}
+          onClick={() => dispatch(handleDeleteItemFromCart(id))}
         >
           close
         </i>
